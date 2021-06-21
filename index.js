@@ -6,7 +6,7 @@ const fetch = require("node-fetch")
 const app = express();
 app.use(express.json());
 
-let db;
+/* let db; */
 
 app.use(cors());
 
@@ -15,14 +15,9 @@ app.get("/weather", function (req,res) {
    fetch('https://influencity.s3.amazonaws.com/coding-test/almeria.json')
    .then((res)=>res.json())
    .then((data)=>{
-       if (data.cod == 200) {
-           res.send({message: data.message, data: data})
-       }
-       else {
-           res.send({code: data.cod, error: data.message})
-       }
+       res.send({data: data})
     })
 
 })
 
-app.listen(3001);
+app.listen(process.env.PORT || 3001);
