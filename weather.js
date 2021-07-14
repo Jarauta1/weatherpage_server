@@ -4,11 +4,12 @@ const app = express();
 
 const fetch = require("node-fetch")
 
-let average = 0
+let average
 let allInfo = {}
 let generalMap = {}
 
 router.get("/", function (req,res){
+    average = 0
     Promise.all([
         fetch('https://influencity.s3.amazonaws.com/coding-test/almeria.json'),
         fetch('https://influencity.s3.amazonaws.com/coding-test/step_2_92398987243/granada.json'),
@@ -79,7 +80,6 @@ router.get("/", function (req,res){
         average = average/8
         average = average-273.15
         average = (average).toFixed(2)
-
         return [allInfo,generalMap,average]
       })
       .then((data) => {
